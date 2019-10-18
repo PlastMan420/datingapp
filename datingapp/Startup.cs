@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
 using datingapp.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace datingapp
 {
@@ -32,6 +35,16 @@ namespace datingapp
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddCors();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            // this will be our authentication scheme ->
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                // no validation rn since we will be just using localhost -->
+                ValidateIssuer = false, 
+                ValidateAudience = false
+            }) ;
 
             // service.-----
             // "anything available as a service can be injected into any other part of our application"
@@ -43,6 +56,7 @@ namespace datingapp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                IdentityModelEventSource.ShowPII = true;
             }
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
@@ -56,7 +70,8 @@ namespace datingapp
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseAuthentication(); // tell out app about the authentication procedure 
+                                    //at "services.AddAuthentication()" up inside "ConfigureServices()"
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

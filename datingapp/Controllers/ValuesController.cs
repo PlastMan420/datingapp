@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using datingapp.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace datingapp.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase // Controller vs ControllerBase
@@ -25,7 +27,7 @@ namespace datingapp.Controllers
             IActionResult returns O.K instead of string.
          */
         //public  ActionResult<IEnumerable<string>> Get()
-        public async Task<IActionResult> GetValues()
+        public async Task<IActionResult> GetValues() //Protected by authorization
         {
             var values = await _context.Values.ToListAsync(); 
             return Ok(values);
@@ -35,7 +37,7 @@ namespace datingapp.Controllers
             */
         }
 
-        // GET api/values/5
+        [AllowAnonymous] //Everything beyond this can be accessed by "unauthorized" users.
         [HttpGet("{id}")]
         //getting a specific value
         public async Task<IActionResult> GetValue(int id)
