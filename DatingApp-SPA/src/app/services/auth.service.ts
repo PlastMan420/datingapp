@@ -14,11 +14,15 @@ login(model: any) {
     .pipe(
       map((response: any) => {
         const user = response;
-        if(user){
+        if (user) {
           localStorage.setItem('token', user.token);
         }
       })
-    )
-
+    );
 }
+  register(model: any) { // model is an object that will store username and password
+    return this.http.post(this.baseUrl + 'register', model); // localhost:5000/api/auth/register
+    // 'post' method will return an observable so you need to 'subscribe' to it inside the component you need to use.
+    // in our case. the 'register' component
+  }
 }
