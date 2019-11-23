@@ -1,18 +1,15 @@
-﻿using System;
+﻿using datingapp.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace datingapp.Models
-{
-    public class User
+namespace datingapp.Dtos
+{   // Detailed view of a user
+    public class UserForDetailedDto
     {
         public int Id { get; set; }
         public string Username { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
         public string gender { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public int Age { get; set; }
         public string KnownAs { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
@@ -21,7 +18,7 @@ namespace datingapp.Models
         public string LookingFor { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public ICollection<PhotoForDetailedDto> Photos { get; set; }
-
-}
+        public string PhotoUrl { get; set; }
+        public ICollection<PhotosForDetailedDto> Photos { get; set; }
+    }
 }

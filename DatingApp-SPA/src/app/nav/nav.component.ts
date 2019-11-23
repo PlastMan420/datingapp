@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { AlertifyService } from '../services/alertify.service';
+import {Router } from '@angular/router';
  // this is the top nav-bar
 @Component({
   selector: 'app-nav',
@@ -10,7 +11,7 @@ import { AlertifyService } from '../services/alertify.service';
 export class NavComponent implements OnInit {
   model: any = {};
 
-  constructor(public authService: AuthService, private alertify: AlertifyService) { }
+  constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
   // provate services can still be injected into HTML
   ngOnInit() {
   }
@@ -21,7 +22,11 @@ export class NavComponent implements OnInit {
       console.log('Logged in successfully');
     }, error => {
       this.alertify.error(error);
-    });
+    },
+    () => {
+      this.router.navigate(['/members']);
+    }
+    );
   }
 
   loggedIn() {

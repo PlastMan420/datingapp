@@ -17,8 +17,11 @@ namespace datingapp.Data
         //"in our class, in order to tell entity framework about our entities, we need to give
         // it some properties."
         // and these properties are of type "DbSet".
-        public DbSet<Value> Values { get; set; } //pluralize the name because this is gonna be the DB name
+
+        // each property is a DB table:
+        public DbSet<Value> Values { get; set; } //pluralize the name because this is gonna be the DB table name
         public DbSet<User> Users { get; set; }
+        public DbSet<PhotoForDetailedDto> Photos { get; set; }
     }
 }
 

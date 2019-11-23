@@ -25,6 +25,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using datingapp.Helpers;
+using AutoMapper;
 
 namespace datingapp
 {
@@ -41,9 +42,11 @@ namespace datingapp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddAutoMapper(typeof(Startup)); //https://stackoverflow.com/questions/50411188/trying-to-add-automapper-to-asp-net-core-2
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddCors();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
             // this will be our authentication scheme ->
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             options.TokenValidationParameters = new TokenValidationParameters

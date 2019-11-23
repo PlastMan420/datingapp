@@ -27,7 +27,7 @@ namespace datingapp.Controllers
             IActionResult returns O.K instead of string.
          */
         //public  ActionResult<IEnumerable<string>> Get()
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> GetValues() //Protected by authorization
         {
             var values = await _context.Values.ToListAsync(); 
