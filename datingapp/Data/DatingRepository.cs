@@ -10,11 +10,10 @@ namespace datingapp.Data
     public class DatingRepository : IDatingRepository
     {
         private readonly DataContext _context;
-        public DatingRepository(DataContext _context)
+        public DatingRepository(DataContext context)
         {
-            Context = _context;
+            _context = context;
         }
-
         public DataContext Context { get; }
 
         public void Add<T>(T entity) where T : class

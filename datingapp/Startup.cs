@@ -6,6 +6,7 @@ using System.Text;
 using System.Net;
 
 using datingapp.Data;
+using datingapp.Helpers;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -24,7 +25,6 @@ using Microsoft.Extensions.Options;
 
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
-using datingapp.Helpers;
 using AutoMapper;
 
 namespace datingapp
@@ -97,9 +97,12 @@ namespace datingapp
             */
             app.UseRouting();
 
+            // Authentication and Authorization MUST be loaded in this order:
+            app.UseAuthentication();
             app.UseAuthorization();
-            app.UseAuthentication(); // tell out app about the authentication procedure 
-                                    //at "services.AddAuthentication()" up inside "ConfigureServices()"
+            // tell out app about the authentication procedure 
+            //at "services.AddAuthentication()" up inside "ConfigureServices()"
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
