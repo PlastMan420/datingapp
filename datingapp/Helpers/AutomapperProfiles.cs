@@ -38,7 +38,7 @@ namespace datingapp.Helpers
             });
 
             ///////////////////////////////////////////////////////////////////////////////////
-            CreateMap<User, PhotosForDetailedDto>();
+            CreateMap<Photo, PhotosForDetailedDto>();
             
         }
         

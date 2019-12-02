@@ -45,6 +45,7 @@ namespace datingapp
             services.AddAutoMapper(typeof(Startup)); //https://stackoverflow.com/questions/50411188/trying-to-add-automapper-to-asp-net-core-2
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddCors();
+            services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
             // this will be our authentication scheme ->
@@ -63,7 +64,7 @@ namespace datingapp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -87,6 +88,7 @@ namespace datingapp
                 });
             }
 
+            //seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             /* app.UseMVC is replaced by everything under this comment as MVC is now deprecated and will be removed

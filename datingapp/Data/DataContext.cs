@@ -21,7 +21,7 @@ namespace datingapp.Data
         // each property is a DB table:
         public DbSet<Value> Values { get; set; } //pluralize the name because this is gonna be the DB table name
         public DbSet<User> Users { get; set; }
-        public DbSet<PhotoForDetailedDto> Photos { get; set; }
+        public DbSet<Photo> Photos { get; set; }
     }
 }
 

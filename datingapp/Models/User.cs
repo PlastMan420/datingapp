@@ -21,7 +21,7 @@ namespace datingapp.Models
         public string LookingFor { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public ICollection<PhotoForDetailedDto> Photos { get; set; }
+        public ICollection<Photo> Photos { get; set; }
 
 }
 }
