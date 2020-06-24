@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class MemberEditComponent implements OnInit {
   user: User;
   // "to access the form. use the @ViewChild decorator"
-  @ViewChild('editForm', {static: false}) editForm: NgForm;
+  @ViewChild('editForm') editForm: NgForm;
   // HosttListener decorator listens to host events. host is the browser.
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
