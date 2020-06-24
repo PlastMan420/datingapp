@@ -9,7 +9,7 @@ namespace datingapp.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base (options) // base constructor of DbContext 
+        public DataContext(DbContextOptions<DataContext> options) : base (options) // initialize EF Core DbContext. class must extend DbContext
         {
 
         }

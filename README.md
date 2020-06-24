@@ -7,6 +7,7 @@ Build Requirements
  - @auth0/angular-jwt
  - bootstrap 4.1+
  - ngx-bootstrap 5+
+ - ngx-gallery 5.10+
  - bootswatch 4.1+
  - Alertifyjs
  - awesome font

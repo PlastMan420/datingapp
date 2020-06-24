@@ -12,6 +12,7 @@ namespace datingapp.Data
         Task<bool> SaveAll(); // zero changes to save or more than 0 changes to save.
         Task<IEnumerable<User>> GetUsers();
         Task<User> GetUser(int id);
-
+        Task<Photo> GetPhoto(int id);
+        Task<Photo> GetMainPhoto(int userid);
     }
 }

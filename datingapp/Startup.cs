@@ -45,6 +45,7 @@ namespace datingapp
             services.AddAutoMapper(typeof(Startup)); //https://stackoverflow.com/questions/50411188/trying-to-add-automapper-to-asp-net-core-2
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddCors();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();

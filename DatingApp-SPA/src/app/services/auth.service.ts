@@ -14,7 +14,7 @@ export class AuthService {
 
 constructor(private http: HttpClient) { } // injecting http client module into constructor
 login(model: any) {
-  // post(address, method, will besent to the body, options)
+  // post(address, will be sent to the body, options)
   return this.http.post(this.baseUrl + 'login', model) // returns an observable. you need to subscribe to it.
     .pipe(
       map((response: any) => {
